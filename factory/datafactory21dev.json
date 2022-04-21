@@ -1,0 +1,9 @@
+{
+	"name": "datafactory21dev",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6a3e9782-82d0-4ae0-88a6-bda6398802a4",
+		"tenantId": "ad5ae965-c8e6-4355-a91d-8450073e8f4e"
+	}
+}
