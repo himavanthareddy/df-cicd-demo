@@ -1,0 +1,68 @@
+{
+	"name": "dataflowCTDL",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "datasetsql",
+						"type": "DatasetReference"
+					},
+					"name": "sql"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "dataset_csv",
+						"type": "DatasetReference"
+					},
+					"name": "storage"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          UserId as integer,",
+				"          ProductId as integer,",
+				"          ItemsPurchasedLast12Months as integer,",
+				"          IsTopProduct as boolean,",
+				"          IsPreferredProduct as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sql",
+				"sql filter(ERROR_FUNCTION('')) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CustomerId as string,",
+				"          FirstName as string,",
+				"          MiddleInitial as string,",
+				"          LastName as string,",
+				"          FullName as string,",
+				"          Gender as string,",
+				"          Age as string,",
+				"          BirthDate as string,",
+				"          Address_PostalCode as string,",
+				"          Address_Street as string,",
+				"          Address_City as string,",
+				"          Address_Country as string,",
+				"          Mobile as string,",
+				"          Email as string",
+				"     ),",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> storage"
+			]
+		}
+	}
+}
