@@ -21,11 +21,7 @@
 					"name": "storage"
 				}
 			],
-			"transformations": [
-				{
-					"name": "filter1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
 				"source(output(",
 				"          UserId as integer,",
@@ -38,8 +34,7 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sql",
-				"sql filter(ERROR_FUNCTION('')) ~> filter1",
-				"filter1 sink(allowSchemaDrift: true,",
+				"sql sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          CustomerId as string,",
