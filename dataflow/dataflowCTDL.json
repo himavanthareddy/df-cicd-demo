@@ -27,7 +27,14 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          UserId as integer,",
+				"          ProductId as integer,",
+				"          ItemsPurchasedLast12Months as integer,",
+				"          IsTopProduct as boolean,",
+				"          IsPreferredProduct as boolean",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> sql",
